@@ -1,0 +1,21 @@
+{
+
+  "Connection": {
+    "ServerUrl": "http://192.168.137.249:5555",
+    "OrganizationName": "IAMark2",
+    "CredentialPrompt": false,
+    "password": "pass@word1",
+    "User": "red\\administrator"
+  }
+  "Updates": {
+    "Entities": {
+      {
+        "contact": {
+          "key": "contactid",
+          "fields": [ "middlename", "mobilephone" ]
+        }
+      }
+    }
+  }
+
+  }
