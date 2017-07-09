@@ -54,13 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProClean.ps1" />
-    <Compile Include="ProCleanPS.psd1" />
-    <Compile Include="ProCleanPS.psm1" />
-    <Compile Include="ProCleanPS.tests.ps1" />
-    <Compile Include="XrmFunctionsl.psm1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration.json" />
+    <Content Include="proClean.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

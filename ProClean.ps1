@@ -1,24 +1,20 @@
-﻿
-try
-{   
-	#Add-PSSnapin Microsoft.Xrm.Tooling.Connector
-	Import-Module "C:\Source\ProCleanPS\XrmFunctionsl.psm1" -Force
-	$CrmConnection = Get-Crm-Connection
-#$service = New-Object -TypeName Microsoft.Xrm.Client.Services.OrganizationService -ArgumentList $CrmConnection;
-$entityname = "contact"
-$entitynamePKname = "contactid"
-$fieldname ="middlename"
-$objectId = "0A800B39-F33F-E711-A9FF-00155D4B0103"
+﻿Import-Module ".\Libraries\Microsoft.Xrm.Data.PowerShell\Microsoft.Xrm.Data.PowerShell.psd1"
+<#
+$entityName = "contact"
+$fieldName = "mobilephone"
+$updateTo = "2342342"
+#>
 
-$fieldvalue = "Polygast"
-	Update-CRM-Record $CrmConnection $entityname $fieldname $objectId
-}
-catch
-{
-$thing = $_
-    #$_.LoaderExceptions | %
-    #{
-    #   # Write-Error $_.Message
-    #}
-}	
+
+$config = Get-Content -Raw ".\ProClean.json" | ConvertFrom-Json
+$entitykey = $config.entityName + "id"
+$updateTo = $config.updateTo;
+if ($updateTo -eq $null) { $updateTo = "";}
+
+if ($conn -eq $null) { $conn = Get-CrmConnection -InteractiveMode }
+$records = Get-CrmRecords -conn $conn -entityLogicalName $config.entityName -filterAttribute $config.fieldName -FilterOperator "not-null" -Fields $fieldName,$($entityName+"id")
+
+"retrieved $($records.Count) records with non-null $($config.fieldname)"
+
+foreach ($rec in $records.CrmRecords) {Set-CrmRecord -EntityLogicalName $config.entityName -Id $rec.($entitykey)-Fields @{$config.fieldName=$config.updateTo}}
 
