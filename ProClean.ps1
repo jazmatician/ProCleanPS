@@ -5,16 +5,41 @@ $fieldName = "mobilephone"
 $updateTo = "2342342"
 #>
 
+    if ($conn -eq $null) { $conn = Get-CrmConnection -InteractiveMode }
 
-$config = Get-Content -Raw ".\ProClean.json" | ConvertFrom-Json
-$entitykey = $config.entityName + "id"
-$updateTo = $config.updateTo;
-if ($updateTo -eq $null) { $updateTo = "";}
+$configColl = Get-Content -Raw ".\ProClean.json" | ConvertFrom-Json
+foreach ($config in $configColl.entities) {
+    $entitykey = $config.entityName + "id"
+    $attributes = ""; $criteria = ""; $fields = @{};
+    foreach ($clearMe in $config.fieldsToClear) {
+        $attributes += "<attribute name='$clearMe' />"
+        $criteria += "<condition attribute='$clearMe' operator='not-null' />"
+        $fields.Add($clearMe,"");
+    }
+    $fetch = '<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false" no-lock="true">'
+    $fetch += "<entity name='$($config.entityName)'>"
+    $fetch += $attributes
+    $fetch += "<filter type='or' >"
+    $fetch += $criteria
+    $fetch += "</filter></entity></fetch>"
 
-if ($conn -eq $null) { $conn = Get-CrmConnection -InteractiveMode }
-$records = Get-CrmRecords -conn $conn -entityLogicalName $config.entityName -filterAttribute $config.fieldName -FilterOperator "not-null" -Fields $fieldName,$($entityName+"id")
+  <# PII only, not resetting any fields
+    $updateTo = $config.updateTo;
+    if ($updateTo -eq $null) { $updateTo = "";}
+    #>
+    $page = 1
+    $cookie = $null
+    do {
+        $records =  Get-CrmRecordsByFetch -conn $conn -Fetch $fetch -PageNumber $page -PageCookie $cookie  -AllRows
+        #}
+    
+        "retrieved $($records.Count) records with non-null $($config.fieldname)"
+        $cookie = $records.PagingCookie;
+        $page += 1;
 
-"retrieved $($records.Count) records with non-null $($config.fieldname)"
 
-foreach ($rec in $records.CrmRecords) {Set-CrmRecord -EntityLogicalName $config.entityName -Id $rec.($entitykey)-Fields @{$config.fieldName=$config.updateTo}}
-
+        foreach ($rec in $records.CrmRecords) {
+            Set-CrmRecord -EntityLogicalName $config.entityName -Id $rec.($entitykey) -Fields $fields;
+        }
+    } while ($records.NextPage -eq $true)
+}
