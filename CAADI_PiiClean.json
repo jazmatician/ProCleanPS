@@ -1,0 +1,25 @@
+{
+	"url": "https",
+	"organization": "CAADI",
+	"entities": 
+	[{
+		"entityName": "incident",
+		"fieldsToClear": ["caadi_mainphone","caadi_anumber","description"]
+	},
+	{
+		"entityName": "systemuser",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "contact",
+		"fieldsToClear": ["caadi_Anumber","caadi_CountryOfBirth","caadi_DateOfBirthString", "BirthDate","mobilephone"]
+	},
+	{
+		"entityName": "email",
+		"fieldsToClear": ["description"]
+	},
+	{
+		"entityName": "caadi_attorney",
+		"fieldsToClear": ["caadi_Othertextbox"]
+	}]
+}

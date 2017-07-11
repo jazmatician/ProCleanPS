@@ -1,0 +1,63 @@
+{
+	"url": "https",
+	"organization": "CAADI",
+	"entities": 
+	[
+	{
+		"entityName": "contact",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "systemuser",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "email",
+		"fieldsToClear": ["description"]
+	},
+    {
+      "entityName": "ia_fyitask",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_division",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_taskextensionrequest",
+      "fieldsToClear": [ "ia_requestreason" ]
+    },
+    {
+      "entityName": "ia_externalcoordinator",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_internalcoordinator",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_oltask",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_officewall",
+      "fieldsToClear": [ "ia_note" ]
+    },
+    {
+      "entityName": "ia_wall",
+      "fieldsToClear": [ "ia_note" ]
+    },
+    {
+      "entityName": "ia_assignment",
+      "fieldsToClear": [ "ia_instructions" ]
+    },
+    {
+      "entityName": "ia_task",
+      "fieldsToClear": [ "ia_instructions", "ia_hpcomment" ]
+    },
+    {
+      "entityName": "ia_taskrequest",
+      "fieldsToClear": [ "ia_instructions" ]
+    }
+	]
+}

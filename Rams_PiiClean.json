@@ -1,0 +1,13 @@
+{
+	"url": "https",
+	"organization": "RAMS",
+	"entities": 
+	[{
+		"entityName": "contact",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "systemuser",
+		"fieldsToClear": ["telephone1","mobilephone"]
+	}]
+}

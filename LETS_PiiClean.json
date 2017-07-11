@@ -1,0 +1,45 @@
+{
+	"url": "https",
+	"organization": "LETS",
+	"entities": 
+	[{
+		"entityName": "contact",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "systemuser",
+		"fieldsToClear": ["mobilephone"]
+	},
+	{
+		"entityName": "lets_membersofcongress",
+		"fieldsToClear": ["lets_DateofBirth","lets_BIO", "lets_MaidenName"]
+	},
+	{
+		"entityName": "lets_constituent",
+		"fieldsToClear": ["lets_dob","lets_ANumber", "lets_idtext"]
+	},
+	{
+		"entityName": "lets_consinqs",
+		"fieldsToClear": ["lets_constituentidtext"]
+	},
+	{
+		"entityName": "lets_identifier",
+		"fieldsToClear": ["lets_name","lets_description"]
+	},
+	{
+		"entityName": "lets_privateinquiry",
+		"fieldsToClear": ["lets_description"]
+	},
+	{
+		"entityName": "lets_committeestaff",
+		"fieldsToClear": ["new_telephone"]
+	},
+	{
+		"entityName": "email",
+		"fieldsToClear": ["lets_tempbody","description"]
+	},
+	{
+		"entityName": "lets_inquiry",
+		"fieldsToClear": ["lets_ANumber","lets_Description"]
+	}]
+}
